@@ -92,12 +92,12 @@ function handleSSS() {
   })
 }
 
-// input range rander
+// input range render
 function render (output, value) {
   output.innerHTML = value
 }
 
-const input = document.querySelector('input')
+const input = document.querySelector('#form-amount')
 const output = document.querySelector('b')
 
 input.addEventListener('input', function (e) {

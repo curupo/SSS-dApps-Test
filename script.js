@@ -3,7 +3,7 @@ const symbol = require('/node_modules/symbol-sdk')
 const GENERATION_HASH = '7FCCD304802016BEBBCD342A332F91FF1F3BB5E902988B352697BE245F48E836'
 const EPOCH = 1637848847
 const XYM_ID = '3A8416DB2D53B6C8'
-const NODE_URL = 'https://bonsai.anodebank.net:3001'
+const NODE_URL = 'https://test.opening-line.jp:3001'
 const NET_TYPE = symbol.NetworkType.TEST_NET
 
 const address = symbol.Address.createFromRawAddress("TADAGTEEVR4BF5QL367F5PVSXXFCW3SO63HSZRA")
@@ -28,7 +28,16 @@ accountHttp.getAccountInfo(address)
     }
   })
 
-nsactionHttp
+const transactionHttp = repositoryFactory.createTransactionRepository()
+const searchCriteria = {
+  group: symbol.TransactionGroup.Confirmed,
+  address,
+  pageNumber: 1,
+  pageSize: 20,
+  order: symbol.Order.Desc,
+}
+
+transactionHttp
   .search(searchCriteria)
   .toPromise()
   .then((txs) => {
@@ -51,7 +60,8 @@ nsactionHttp
     }
   })
 
-function getTransactionType (type) {
+function getTransactionType (type) { // https://symbol.github.io/symbol-sdk-typescript-javascript/1.0.3/enums/TransactionType.html
   if (type === 16724) return 'TRANSFER TRANSACTION'
   return 'OTHER TRANSACTION'
 }
+

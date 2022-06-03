@@ -23,7 +23,7 @@ accountHttp.getAccountInfo(address)
     for (let m of accountInfo.mosaics) {
       if (m.id.id.toHex() === XYM_ID) {
         const dom_xym = document.getElementById('wallet-xym')
-        dom_xym.innerText = `XYM Balance : ${m.amount.compact()}`
+        dom_xym.innerText = `XYM Balance : ${m.amount.compact() / Math.pow(10, 6)}`
       }
     }
   })
@@ -76,7 +76,7 @@ function handleSSS() {
     [
       new symbol.Mosaic(
         new symbol.MosaicId(XYM_ID),
-        symbol.UInt64.fromUint(Number(amount))
+        symbol.UInt64.fromUint(Number(amount) * Math.pow(10, 6))
       )
     ],
     symbol.PlainMessage.create(message),
